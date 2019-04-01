@@ -1,3 +1,6 @@
+// Algorithm 1: 利用加法, 从1加到maxNum
+// 结束的标准是：最高位产生进位，此时可以停止
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -53,6 +56,46 @@ public class Test {
 	public static void main(String[] args) {
 		printNums(3);
 
+	}
+
+}
+
+
+// Algorithm 2: 递归, 排列的思想, 比较简洁
+
+public class PrintMaxNum {
+	
+	public static void printMax(int[] arr, int start, int end) {
+		if(start > end) {
+			StringBuilder sb = new StringBuilder();
+			int len = arr.length;
+			boolean hasStart = false;
+			for(int i=0; i<len; i++) {
+				if(arr[i] != 0 && !hasStart)
+					hasStart = true;
+				if(hasStart) {
+					sb.append(arr[i]);
+				}
+			}
+			if(!sb.toString().equals("")) 
+				System.out.println(sb.toString());
+			
+			return;
+		}
+		
+		for(int i=0; i<10; i++) {
+			arr[start] = i;
+			printMax(arr, start + 1, end);
+		}
+	}
+	
+	
+	public static void main(String[] args) {
+		int num = 3;
+		int[] arr = new int[num];
+		for(int i=0; i<num; i++)
+			arr[i] = 0;
+		printMax(arr, 0, num - 1);
 	}
 
 }
